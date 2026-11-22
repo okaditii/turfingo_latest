@@ -15,6 +15,11 @@ function Waitlist() {
     const [totalCount, setTotalCount] = useState(0)
 
     const fetchPlayers = useCallback(async () => {
+        if (!supabase) {
+            // Design preview: no database configured, so show the empty list.
+            setLoading(false)
+            return
+        }
         setLoading(true)
         try {
             let query = supabase

@@ -126,6 +126,13 @@ function Register() {
         const regId = generateRegistrationId()
         setRegistrationId(regId)
 
+        // Design preview: without Razorpay/Supabase keys, skip payment and show the success screen.
+        if (!import.meta.env.VITE_RAZORPAY_KEY_ID || !supabase) {
+            setPaymentStatus('success')
+            setIsSubmitting(false)
+            return
+        }
+
         const options = {
             key: import.meta.env.VITE_RAZORPAY_KEY_ID,
             amount: 19900, // ₹199 in paise
