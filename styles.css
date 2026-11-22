@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ff3344;
+    /* Vibrant red */
+    color: #fff;
+    font-family: 'Roboto Condensed', sans-serif;
+    /* Remove overflow hidden from body to allow standard zoom scaling if needed, 
+       but we want the app-like feel so we center our page container */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.page-container {
+    position: relative;
+    /* Container acts as the main viewport that restricts max zoom-out physical size */
+    width: 100vw;
+    height: 100vh;
+    max-width: 2500px;
+    /* If zoomed out, this shrinks physically on screen */
+    container-type: inline-size;
+    container-name: page;
+    overflow: hidden;
+    /* Optional shadow to show bounds if zoomed out far 
+       box-shadow: 0 0 50px rgba(0,0,0,0.1); */
+}
+
+/* Background "COMMUNITY" Text */
+.background-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Anton', sans-serif;
+    /* Scale specifically to the bounded page container */
+    font-size: 24cqw;
+    color: #1a1a1a;
+    z-index: 2;
+    /* Now layered securely between the lower and upper layered images */
+    /* Behind the images */
+    white-space: nowrap;
+    line-height: 0.8;
+    /* Tighter line height for Anton */
+    user-select: none;
+    pointer-events: none;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* Make text separate nicely when zoomed-out */
+    transition: transform 0.5s ease, font-size 0.5s ease;
+}
+
+/* Top Right Text */
+.top-right-text {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    text-align: right;
+    font-size: max(12px, 1.2cqw);
+    z-index: 10;
+    letter-spacing: 2px;
+}
+
+.top-right-text span {
+    font-size: max(10px, 0.9cqw);
+    color: #1a1a1a;
+}
+
+.top-right-text strong {
+    font-family: 'Anton', sans-serif;
+    font-size: max(14px, 1.5cqw);
+}
+
+/* Bottom Group to guarantee no overlap */
+.bottom-group {
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: max(15px, 2cqh);
+    z-index: 10;
+    width: max-content;
+    pointer-events: none;
+}
+
+/* Footer & Social Icons */
+.footer {
+    text-align: center;
+    pointer-events: auto;
+    /* Let clicks pass through group to footer */
+}
+
+.footer-text {
+    font-family: 'Anton', sans-serif;
+    font-size: max(14px, 1.4cqw);
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: max(8px, 1cqw);
+}
+
+.social-icons a {
+    color: #1a1a1a;
+    background-color: #fff;
+    width: max(25px, 3cqw);
+    height: max(25px, 3cqw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: max(12px, 1.2cqw);
+    transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+}
+
+/* Image Containers - Z-index above text */
+.image-container {
+    position: absolute;
+    z-index: 5;
+    /* Above background text */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.image-container:hover {
+    transform: scale(1.05);
+}
+
+/* Base image styling */
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* We use cqw for sizes instead of vw so they bounded by page-container */
+/* Top left */
+.img-1 {
+    top: 2%;
+    /* Move slightly higher to be well above the community text */
+    left: 4%;
+    width: 18cqw;
+    height: 12cqw;
+    z-index: 5;
+    /* Remains over the text */
+}
+
+/* Top center */
+.img-2 {
+    top: 2%;
+    left: 40%;
+    width: 15cqw;
+    height: 15cqw;
+}
+
+/* Bottom left */
+.img-3 {
+    bottom: 5%;
+    left: -2%;
+    width: 20cqw;
+    height: 15cqw;
+    border-radius: 0 12px 12px 0;
+    /* flat left edge */
+    z-index: 1;
+    /* Placed behind the community text */
+}
+
+/* Bottom right */
+.img-4 {
+    bottom: -2%;
+    right: 5%;
+    width: 16cqw;
+    height: 22cqw;
+    z-index: 5;
+    /* Placed OVER the community text */
+}
+
+/* Bottom Center Text */
+.bottom-center-text {
+    text-align: center;
+    letter-spacing: 1px;
+    /* Pointer-events: none inherited from container */
+}
+
+.bottom-center-text strong {
+    font-family: 'Anton', sans-serif;
+    font-size: max(16px, 1.6cqw);
+    color: #1a1a1a;
+}
+
+.bottom-center-text span {
+    font-size: max(12px, 1.1cqw);
+    color: #1a1a1a;
+}
